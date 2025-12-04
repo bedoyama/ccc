@@ -14,6 +14,8 @@ add_executable(listing_17_9 listing_17_9.cpp)
 
 if (MSVC)
 	target_link_libraries(filesystem PRIVATE ${Boost_SYSTEM_LIBRARY})
+elseif(APPLE)
+	target_link_libraries(filesystem PRIVATE ${Boost_SYSTEM_LIBRARY})
 else()
 	target_link_libraries(filesystem PRIVATE stdc++fs ${Boost_SYSTEM_LIBRARY})
 	target_link_libraries(listing_17_2 PRIVATE stdc++fs)

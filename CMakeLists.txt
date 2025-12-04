@@ -27,6 +27,17 @@ set(Boost_USE_MULTITHREADED ON)
 add_definitions(-D_WIN32_WINNT=0x0501)
 # Set policy to use new BoostConfig.cmake
 cmake_policy(SET CMP0167 NEW)
+
+# Find ICU on macOS (keg-only formula)
+if(APPLE)
+    set(ICU_ROOT "/opt/homebrew/opt/icu4c@78")
+    find_package(ICU COMPONENTS data i18n uc)
+    if(ICU_FOUND)
+        include_directories(${ICU_INCLUDE_DIRS})
+        link_directories("/opt/homebrew/opt/icu4c@78/lib")
+    endif()
+endif()
+
 find_package(Boost 1.70 REQUIRED COMPONENTS regex date_time filesystem unit_test_framework program_options)
 include_directories(${Boost_INCLUDE_DIRS})
 

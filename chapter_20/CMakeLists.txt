@@ -27,3 +27,7 @@ target_link_libraries(buffers PRIVATE ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INI
 target_link_libraries(upper_echo_server PRIVATE ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(upper_echo_server_async PRIVATE ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 target_link_libraries(upper_echo_server_multi PRIVATE ${Boost_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+
+if(APPLE AND ICU_FOUND)
+    target_link_libraries(buffers PRIVATE ${ICU_LIBRARIES})
+endif()
