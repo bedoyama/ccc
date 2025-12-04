@@ -25,8 +25,10 @@ include_directories("third_party/asutton/origin")
 set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 add_definitions(-D_WIN32_WINNT=0x0501)
-find_package(Boost COMPONENTS regex date_time system filesystem unit_test_framework program_options REQUIRED)
-include_directories(${Boost_INCLUDE_DIR})
+# Set policy to use new BoostConfig.cmake
+cmake_policy(SET CMP0167 NEW)
+find_package(Boost 1.70 REQUIRED COMPONENTS regex date_time filesystem unit_test_framework program_options)
+include_directories(${Boost_INCLUDE_DIRS})
 
 macro(boosttest_add_test TESTNAME)
     add_executable(${TESTNAME} ${ARGN})
