@@ -35,14 +35,6 @@ cmake --build .
 
 Your build directory should now contain requisite files for building on your current platform. On Windows, for example, you should find a `.sln` Visual Studio Solution file. On macOS/Linux, you should find a `make` file.
 
-In MacOS you may need to run
-
-```
-brew install boost
-```
-
-before the `cmake` command.
-
 ---
 
 ## Appendix: macOS Apple Silicon (ARM64) Build Fixes
