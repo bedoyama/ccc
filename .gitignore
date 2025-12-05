@@ -285,3 +285,11 @@ build-win/*
 build-mac/*
 build-nix/*
 cmake-build-debug/
+
+# VSCode
+.vscode/
+*.code-workspace
+
+# CLion
+.idea/
+cmake-build-*/
