@@ -76,3 +76,71 @@ ICU (International Components for Unicode) is a keg-only formula on Homebrew, me
 - Fixed `chapter_20/connect_async.cpp` to explicitly specify the endpoint type instead of using `auto` in the lambda callback.
 
 These changes ensure full compatibility with modern macOS development tools while maintaining backward compatibility with other platforms.
+
+---
+
+## Appendix: Debugging with LLDB on macOS
+
+macOS uses LLDB as the default debugger (rather than GDB). Here's a quick guide to debugging the examples:
+
+### Starting LLDB
+
+From the build directory, launch LLDB with any executable:
+
+```bash
+lldb ./chapter_1/listing_1_1
+```
+
+Or attach to a running process:
+
+```bash
+lldb -p <process-id>
+```
+
+### Basic LLDB Commands
+
+| Command                 | Description                  | Example                            |
+| ----------------------- | ---------------------------- | ---------------------------------- |
+| `run` or `r`            | Start the program            | `r`                                |
+| `run <args>`            | Start with arguments         | `r arg1 arg2`                      |
+| `breakpoint set` or `b` | Set a breakpoint             | `b main` or `b listing_1_1.cpp:10` |
+| `breakpoint list`       | List all breakpoints         | `breakpoint list`                  |
+| `breakpoint delete`     | Delete breakpoint            | `breakpoint delete 1`              |
+| `next` or `n`           | Step over (next line)        | `n`                                |
+| `step` or `s`           | Step into functions          | `s`                                |
+| `finish` or `f`         | Step out of current function | `f`                                |
+| `continue` or `c`       | Continue execution           | `c`                                |
+| `print` or `p`          | Print variable value         | `p variable_name`                  |
+| `frame variable` or `v` | Print local variables        | `v`                                |
+| `bt` or `backtrace`     | Show call stack              | `bt`                               |
+| `quit` or `q`           | Exit LLDB                    | `q`                                |
+
+### Example Debug Session
+
+```bash
+# Build with debug symbols
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+cmake --build .
+
+# Start debugger
+lldb ./chapter_1/listing_1_1
+
+# In LLDB:
+(lldb) breakpoint set --name main
+(lldb) run
+(lldb) next
+(lldb) print my_variable
+(lldb) continue
+(lldb) quit
+```
+
+### Useful Tips
+
+- **Enable debug symbols**: Add `-DCMAKE_BUILD_TYPE=Debug` when running cmake to include debugging information
+- **Set breakpoint by function**: `b function_name`
+- **Set breakpoint by file/line**: `b filename.cpp:42`
+- **Watch expressions**: `watchpoint set variable my_var`
+- **Conditional breakpoints**: `b main -c "argc > 1"`
+- **Help command**: Type `help` or `help <command>` for detailed information
+
+For more information, see the [LLDB Tutorial](https://lldb.llvm.org/use/tutorial.html) or run `help` within LLDB.
