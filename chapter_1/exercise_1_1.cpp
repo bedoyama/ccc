@@ -1,8 +1,13 @@
 #include <cstdio>
 
 int absolute_value(int x) {
-  // Your code here
-  return 0;
+  auto result = x;
+
+  if (result < 0) {
+    result = -result;
+  }
+
+  return result;
 }
 
 int main() {
